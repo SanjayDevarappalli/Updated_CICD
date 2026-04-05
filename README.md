@@ -25,8 +25,8 @@ This project includes a fully automated CI/CD pipeline using GitHub Actions that
 
 ## Status Badges
 
-![CI Pipeline](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/ci.yml/badge.svg)
-[![codecov](https://codecov.io/gh/YOUR_USERNAME/YOUR_REPO/branch/main/graph/badge.svg)](https://codecov.io/gh/YOUR_USERNAME/YOUR_REPO)
+![CI Pipeline](https://github.com/SanjayDevarappalli/Updated_CICD/actions/workflows/ci.yml/badge.svg)
+[![codecov](https://codecov.io/gh/SanjayDevarappalli/Updated_CICD/branch/main/graph/badge.svg)](https://codecov.io/gh/SanjayDevarappalli/Updated_CICD)
 [![Python](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/)
 
 ## Getting Started
