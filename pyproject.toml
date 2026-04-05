@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cicd-django-project"
+version = "1.0.0"
+description = "CI/CD Pipeline Demo with Django Task Manager"
+requires-python = ">=3.10"
+
+[tool.black]
+line-length = 120
+target-version = ['py311']
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | venv
+  | __pycache__
+  | migrations
+  | staticfiles
+)/
+'''
+
+[tool.bandit]
+targets = ['tasks/', 'myproject/']
+exclude = ['tests/', '*/migrations/']

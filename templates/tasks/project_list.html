@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}My Projects{% endblock %}
+
+{% block content %}
+<h1 style="margin-bottom: 1.5rem;">My Projects</h1>
+
+{% if projects %}
+    {% for project in projects %}
+    <div class="card">
+        <h2><a href="{% url 'project_detail' project.pk %}">{{ project.name }}</a></h2>
+        <p style="color: #7f8c8d; margin: 0.5rem 0;">{{ project.description|truncatewords:30 }}</p>
+        <p style="font-size: 0.875rem; color: #95a5a6;">{{ project.tasks.count }} tasks | Created {{ project.created_at|date:"M d, Y" }}</p>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: {{ project.get_completion_percentage }}%;"></div>
+        </div>
+        <p style="font-size: 0.875rem; margin-top: 0.5rem;">{{ project.get_completion_percentage }}% complete</p>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="card">
+        <p>No projects yet. <a href="{% url 'project_create' %}">Create your first project!</a></p>
+    </div>
+{% endif %}
+{% endblock %}

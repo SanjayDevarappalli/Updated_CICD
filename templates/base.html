@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Task Manager{% endblock %}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; }
+        nav { background: #2c3e50; padding: 1rem; }
+        nav a { color: white; text-decoration: none; margin-right: 1rem; }
+        nav .user { color: #ecf0f1; float: right; }
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+        .card { background: white; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .btn { display: inline-block; padding: 0.5rem 1rem; background: #3498db; color: white; text-decoration: none; border-radius: 4px; border: none; cursor: pointer; }
+        .btn:hover { background: #2980b9; }
+        .btn-danger { background: #e74c3c; }
+        .btn-danger:hover { background: #c0392b; }
+        .btn-success { background: #27ae60; }
+        .btn-success:hover { background: #229954; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; }
+        .progress-bar { height: 8px; background: #ecf0f1; border-radius: 4px; margin-top: 0.5rem; }
+        .progress-fill { height: 100%; background: #27ae60; border-radius: 4px; }
+        .task-status { padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.875rem; }
+        .status-todo { background: #f39c12; color: white; }
+        .status-in_progress { background: #3498db; color: white; }
+        .status-done { background: #27ae60; color: white; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #ecf0f1; }
+        th { background: #f8f9fa; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'project_list' %}">Task Manager</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'project_create' %}">New Project</a>
+            <span class="user">{{ user.username }} | <a href="{% url 'logout' %}">Logout</a></span>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
+    </nav>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

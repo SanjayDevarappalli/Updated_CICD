@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.name }}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1>{{ project.name }}</h1>
+    <p>{{ project.description }}</p>
+    <p style="color: #7f8c8d; font-size: 0.875rem;">
+        Owner: {{ project.owner.username }} | Created {{ project.created_at|date:"M d, Y" }}
+    </p>
+    <div style="margin-top: 1rem;">
+        <a href="{% url 'project_delete' project.pk %}" class="btn btn-danger">Delete Project</a>
+    </div>
+</div>
+
+<div class="card">
+    <h2 style="margin-bottom: 1rem;">Tasks</h2>
+    <a href="{% url 'task_create' project.pk %}" class="btn btn-success" style="margin-bottom: 1rem;">Add Task</a>
+
+    {% if project.tasks.all %}
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Assignee</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Due Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in project.tasks.all %}
+            <tr>
+                <td>{{ task.title }}</td>
+                <td>{{ task.assignee|default:"Unassigned" }}</td>
+                <td>
+                    <span class="task-status status-{{ task.status|lower }}">
+                        {{ task.get_status_display }}
+                    </span>
+                </td>
+                <td>{{ task.get_priority_display }}</td>
+                <td>{{ task.due_date|default:"No due date" }}</td>
+                <td>
+                    <a href="{% url 'task_update' task.pk %}" class="btn">Edit</a>
+                    <a href="{% url 'task_delete' task.pk %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No tasks yet. <a href="{% url 'task_create' project.pk %}">Add your first task!</a></p>
+    {% endif %}
+</div>
+
+<div class="card" style="margin-top: 1rem;">
+    <div class="progress-bar">
+        <div class="progress-fill" style="width: {{ project.get_completion_percentage }}%;"></div>
+    </div>
+    <p style="font-size: 0.875rem; margin-top: 0.5rem;">
+        {{ project.get_completion_percentage }}% complete ({{ project.tasks.count }} tasks)
+    </p>
+</div>
+{% endblock %}
