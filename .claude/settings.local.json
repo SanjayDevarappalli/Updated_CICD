@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(pip install:*)",
-      "Bash(flake8 . --max-line-length=120 --extend-ignore=E203,W503)"
+      "Bash(flake8 . --max-line-length=120 --extend-ignore=E203,W503)",
+      "Bash(python -m pip --version)",
+      "Bash(python manage.py migrate)",
+      "Bash(python manage.py runserver)"
     ]
   }
 }
